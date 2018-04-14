@@ -3,8 +3,8 @@ MAINTAINER Stephen Price <stephen@stp5.net>
 
 ENV DNSCRYPT_PROXY_VERSION 2.0.9
 
-ENV UID 1999
-ENV GID 1999
+ENV UID 1000
+ENV GID 1000
 ENV TIMEZONE UTC
 
 RUN apk add --no-cache ca-certificates
