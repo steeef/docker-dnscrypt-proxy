@@ -27,13 +27,13 @@
 ## The proxy will automatically pick the fastest, working servers from the list.
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-# server_names = ['scaleway-fr', 'google', 'yandex', 'cloudflare']
+server_names = ['cloudflare']
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 ## Note: When using systemd socket activation, choose an empty set (i.e. [] ).
 
-listen_addresses = ['127.0.0.1:53', '[::1]:53']
+listen_addresses = ['0.0.0.0:5353']
 
 
 ## Maximum number of simultaneous client connections to accept
@@ -91,7 +91,7 @@ keepalive = 30
 
 ## Log level (0-6, default: 2 - 0 is very verbose, 6 only contains fatal errors)
 
-# log_level = 2
+log_level = 2
 
 
 ## log file for the application
@@ -151,13 +151,13 @@ cert_refresh_delay = 240
 ## People in China may need to use 114.114.114.114:53 here.
 ## Other popular options include 8.8.8.8 and 1.1.1.1.
 
-fallback_resolver = '9.9.9.9:53'
+fallback_resolver = '1.1.1.1:53'
 
 
 ## Never try to use the system DNS settings; unconditionally use the
 ## fallback resolver.
 
-ignore_system_dns = false
+ignore_system_dns = true
 
 
 ## Automatic log files rotation
