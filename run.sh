@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -ex
 
 sed -i "s/%%SERVER_NAMES%%/${SERVER_NAMES}/" dnscrypt-proxy.toml
 sed -i "s/%%REQUIRE_DNSSEC%%/${REQUIRE_DNSSEC}/" dnscrypt-proxy.toml

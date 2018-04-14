@@ -27,7 +27,7 @@
 ## The proxy will automatically pick the fastest, working servers from the list.
 ## Remove the leading # first to enable this; lines starting with # are ignored.
 
-server_names = ['cloudflare']
+server_names = [%%SERVER_NAMES%%]
 
 
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
@@ -59,7 +59,7 @@ doh_servers = true
 ## Require servers defined by remote sources to satisfy specific properties
 
 # Server must support DNS security extensions (DNSSEC)
-require_dnssec = true
+require_dnssec = %%REQUIRE_DNSSEC%%
 
 # Server must not log user queries (declarative)
 require_nolog = true
@@ -91,7 +91,7 @@ keepalive = 30
 
 ## Log level (0-6, default: 2 - 0 is very verbose, 6 only contains fatal errors)
 
-log_level = 2
+log_level = %%LOG_LEVEL%%
 
 
 ## log file for the application

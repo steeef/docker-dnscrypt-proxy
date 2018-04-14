@@ -24,8 +24,8 @@ RUN mkdir /tmp/dnscrypt-proxy \
 
 EXPOSE 5353/tcp 5353/udp
 
-ENV SERVER_NAMES="'cloudflare'"
-ENV REQUIRE_DNSSEC=true
+ENV SERVER_NAMES="'scaleway-fr', 'google', 'yandex', 'cloudflare'"
+ENV REQUIRE_DNSSEC=false
 ENV LOG_LEVEL=2
 
 USER dnscrypt
