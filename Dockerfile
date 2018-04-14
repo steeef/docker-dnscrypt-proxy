@@ -1,21 +1,30 @@
 FROM alpine:3.7
 MAINTAINER Stephen Price <stephen@stp5.net>
 
-ENV TIMEZONE UTC
 ENV DNSCRYPT_PROXY_VERSION 2.0.9
 
-ADD https://github.com/jedisct1/dnscrypt-proxy/releases/download/${DNSCRYPT_PROXY_VERSION}/dnscrypt-proxy-linux_x86_64-${DNSCRYPT_PROXY_VERSION}.tar.gz /tmp/dnscrypt-proxy.tar.gz
-ADD ./dnscrypt-proxy.toml /etc/dnscrypt-proxy/dnscrypt-proxy.toml
+ENV UID 1999
+ENV GID 1999
+ENV TIMEZONE UTC
 
 RUN apk add --no-cache ca-certificates
 
+RUN addgroup -g ${GID} dnscrypt \
+    && adduser -S -u ${UID} -G dnscrypt -h /dnscrypt dnscrypt
+
+ADD https://github.com/jedisct1/dnscrypt-proxy/releases/download/${DNSCRYPT_PROXY_VERSION}/dnscrypt-proxy-linux_x86_64-${DNSCRYPT_PROXY_VERSION}.tar.gz /tmp/dnscrypt-proxy.tar.gz
+ADD ./dnscrypt-proxy.toml /dnscrypt/dnscrypt-proxy.toml
+
 RUN tar zxf /tmp/dnscrypt-proxy.tar.gz \
-    && mv linux-x86_64/dnscrypt-proxy /usr/bin/dnscrypt-proxy \
+    && mv linux-x86_64/dnscrypt-proxy /dnscrypt/dnscrypt-proxy \
     && mkdir /lib64 \
     && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 \
     && rm -rf linux-x86_64 \
     && rm -f /tmp/dnscrypt-proxy.tar.gz
 
+USER dnscrypt
+
 EXPOSE 5353/tcp 5353/udp
 
-CMD ["dnscrypt-proxy", "-config", "/etc/dnscrypt-proxy/dnscrypt-proxy.toml"]
+WORKDIR /dnscrypt
+CMD ["./dnscrypt-proxy"]
