@@ -20,13 +20,16 @@ RUN curl -sL -o /tmp/dnscrypt-proxy.tar.gz \
     && rm -rf linux-x86_64 \
     && rm -f /tmp/dnscrypt-proxy.tar.gz
 
-# ADD template and use startup script to replace ENVs
-# REQUIRE_DNSSEC, SERVER_NAMES, LOG_LEVEL
 ADD ./dnscrypt-proxy.toml /dnscrypt/dnscrypt-proxy.toml
+ADD ./run.sh /dnscrypt/run.sh
 
 USER dnscrypt
 
 EXPOSE 5353/tcp 5353/udp
 
+ENV SERVER_NAMES="'cloudflare'"
+ENV REQUIRE_DNSSEC=true
+ENV LOG_LEVEL=2
+
 WORKDIR /dnscrypt
-CMD ["./dnscrypt-proxy"]
+CMD ["./run.sh"]
