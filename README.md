@@ -10,7 +10,7 @@ https://github.com/jedisct1/dnscrypt-proxy
 You can set a few variables depending on your needs:
 
 * `SERVER_NAMES="'scaleway-fr', 'google', 'yandex', 'cloudflare'"`: Set to a comma-separated, single-quoted list
-  of server names based on [https://download.dnscrypt.info/dnscrypt-resolvers/v2/public-resolvers.md](this list).
+  of server names based on (this list)[https://download.dnscrypt.info/dnscrypt-resolvers/v2/public-resolvers.md].
 * `REQUIRE_DNSSEC=false`: set to `true` if you want to require DNSSEC queries
 * `LOG_LEVEL=2`: Can be set to `0` to `6`, where a lower number is more
   verbose.
