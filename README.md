@@ -21,7 +21,6 @@ This container will listen on 53 tcp and udp. If you want `dnscrypt-proxy` to li
 
 ```
 docker run -p 53:53/tcp -p 53:53/udp
-  --cap-add=NET_BIND_SERVICE \
   -e REQUIRE_DNSSEC=true \
   -e LOG_LEVEL=5 \
   -e SERVER_NAMES="'cloudflare'" \
