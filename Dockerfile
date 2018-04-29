@@ -22,7 +22,7 @@ RUN mkdir /tmp/dnscrypt-proxy \
     && rm -rf /tmp/dnscrypt-proxy \
     && apk del curl
 
-EXPOSE 5353/tcp 5353/udp
+EXPOSE 53/tcp 53/udp
 
 ENV SERVER_NAMES="'scaleway-fr', 'google', 'yandex', 'cloudflare'"
 ENV REQUIRE_DNSSEC=false
