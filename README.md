@@ -17,10 +17,11 @@ You can set a few variables depending on your needs:
 
 ## Running
 
-This container will listen on 5353 tcp and udp. If you want `dnscrypt-proxy` to listen on the default port 53 tcp/udp, run with a command similar to:
+This container will listen on 53 tcp and udp. If you want `dnscrypt-proxy` to listen on the default port 53 tcp/udp, run with a command similar to:
 
 ```
-docker run -p 53:5353/tcp -p 53:5353/udp \
+docker run -p 53:53/tcp -p 53:53/udp
+  --cap-add=NET_BIND_SERVICE \
   -e REQUIRE_DNSSEC=true \
   -e LOG_LEVEL=5 \
   -e SERVER_NAMES="'cloudflare'" \
