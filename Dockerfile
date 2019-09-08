@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.10
 MAINTAINER Stephen Price <stephen@stp5.net>
 
 ENV DNSCRYPT_PROXY_VERSION=2.0.26 \
