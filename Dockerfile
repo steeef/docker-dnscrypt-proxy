@@ -1,8 +1,8 @@
 FROM alpine:3.10
 MAINTAINER Stephen Price <stephen@stp5.net>
 
-ENV DNSCRYPT_PROXY_VERSION=2.0.27 \
-    DNSCRYPT_PROXY_SHA256=1abfa24f76d8f33ec996f30c2b06efeae8766ac6c8b0b430b87b0c2920396b69
+ENV DNSCRYPT_PROXY_VERSION=2.0.29 \
+    DNSCRYPT_PROXY_SHA256=dc0d8a636d9175438266a4bd55fd53237f50948bee1a5b5a5289387b5b47954e
 
 ENV UID 1000
 ENV GID 1000
@@ -11,7 +11,7 @@ ENV TIMEZONE UTC
 RUN apk add --no-cache curl libcap ca-certificates libc6-compat
 
 RUN mkdir /tmp/dnscrypt-proxy \
-    && curl -fsSL https://github.com/jedisct1/dnscrypt-proxy/releases/download/${DNSCRYPT_PROXY_VERSION}/dnscrypt-proxy-linux_x86_64-${DNSCRYPT_PROXY_VERSION}.tar.gz -o /tmp/dnscrypt-proxy/dnscrypt-proxy.tar.gz \
+    && curl -fsSL https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/${DNSCRYPT_PROXY_VERSION}/dnscrypt-proxy-linux_x86_64-${DNSCRYPT_PROXY_VERSION}.tar.gz -o /tmp/dnscrypt-proxy/dnscrypt-proxy.tar.gz \
     && cd /tmp/dnscrypt-proxy \
     && echo "${DNSCRYPT_PROXY_SHA256} *dnscrypt-proxy.tar.gz" | sha256sum -c - \
     && tar zxf dnscrypt-proxy.tar.gz \
