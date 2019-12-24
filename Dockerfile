@@ -1,5 +1,5 @@
 FROM alpine:3.11
-MAINTAINER Stephen Price <stephen@stp5.net>
+LABEL maintainer="Stephen Price <stephen@stp5.net>"
 
 ENV DNSCRYPT_PROXY_VERSION=2.0.36 \
     DNSCRYPT_PROXY_SHA256=2e01552c83accb02a7b7d768863a12733966066c67742bac5665fdb2df10abd7
