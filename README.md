@@ -2,7 +2,7 @@
 
 ## Description
 
-Installs dnscrypt-proxy 2 in an Alpine Linux Docker image:
+Installs dnscrypt-proxy 2 in a Debian Slim Docker image:
 https://github.com/jedisct1/dnscrypt-proxy
 
 ## Configuration
