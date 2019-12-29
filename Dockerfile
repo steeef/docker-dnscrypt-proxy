@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM debian:stretch-slim
 LABEL maintainer="Stephen Price <stephen@stp5.net>"
 
 ENV DNSCRYPT_PROXY_VERSION=2.0.36 \
@@ -8,21 +8,23 @@ ENV UID 1000
 ENV GID 1000
 ENV TIMEZONE UTC
 
-RUN apk add --no-cache curl libcap ca-certificates libc6-compat
+RUN apt-get update \
+  && apt-get install -y curl libcap2-bin
 
 RUN mkdir /tmp/dnscrypt-proxy \
     && curl -fsSL https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/${DNSCRYPT_PROXY_VERSION}/dnscrypt-proxy-linux_x86_64-${DNSCRYPT_PROXY_VERSION}.tar.gz -o /tmp/dnscrypt-proxy/dnscrypt-proxy.tar.gz \
     && cd /tmp/dnscrypt-proxy \
     && echo "${DNSCRYPT_PROXY_SHA256} *dnscrypt-proxy.tar.gz" | sha256sum -c - \
     && tar zxf dnscrypt-proxy.tar.gz \
-    && addgroup -g ${GID} dnscrypt \
-    && adduser -S -u ${UID} -G dnscrypt -h /dnscrypt dnscrypt \
+    && addgroup --gid ${GID} dnscrypt \
+    && adduser --system --uid ${UID} --gid ${GID} --home /dnscrypt dnscrypt \
     && mv linux-x86_64/dnscrypt-proxy /dnscrypt/dnscrypt-proxy \
     && chown dnscrypt.dnscrypt /dnscrypt/dnscrypt-proxy \
     && setcap 'cap_net_bind_service=+ep' /dnscrypt/dnscrypt-proxy \
     && cd / \
     && rm -rf /tmp/dnscrypt-proxy \
-    && apk del curl
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 53/tcp 53/udp
 
